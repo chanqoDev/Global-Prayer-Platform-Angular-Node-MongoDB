@@ -1,99 +1,59 @@
-# GlobalPrayerDashboard
+# Global Prayer Platform (Angular + Node + MongoDB)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.6.
+---
 
-## Development server
+## Overview
+A fullstack web application built with Angular and Node.js for managing and displaying global prayer requests. The platform demonstrates scalable frontend architecture, RESTful API design, and database integration.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## Features
+- Create and display prayer requests  
+- REST API for data management  
+- MongoDB integration for persistent storage  
+- Responsive UI with Angular  
+- Smooth UI interactions with animations  
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Tech Stack
+- Frontend: Angular  
+- Backend: Node.js, Express  
+- Database: MongoDB  
+- Tools: GSAP, Swiper  
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## Architecture
+- Angular frontend communicates with backend via REST API  
+- Express server handles routing and business logic  
+- MongoDB manages persistent data storage  
+- Modular Angular structure using components and services  
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## Getting Started
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-
-
-
-### install Dependencies 
-
-## Running the Server
-
-1. Install dependencies:
-
+Install dependencies:
 ```bash
 npm install
-
-npm install express cors body-parser
-npm dotenv
-npm install mongoose dotenv
-npm install mongoose
-
-[MongoDB]('https://www.mongodb.com/docs/get-started/?language=nodejs')
-
+ng serve
 npm run start:server
-
-
-3.  make sure you have .env file in root w MongoDB URI ENV
-MONGO_URI=mongodb://localhost:27017/global-prayer-dashboard
+```
+# Env variables 
+```bash
+MONGO_URI=mongodb://localhost:27017/global-prayer-platform
 PORT=4000
+```
 
+### Highlights
+Built fullstack application with Angular and Node.js
+Designed RESTful API for managing application data
+Integrated MongoDB for persistent storage
+Structured frontend using modular Angular architecture
 
-# installing render for Express 
-npm install -g render-cli
-
-
-# install NGFORGE 
-npm install @ngx-pwa/local-storage
-
-
-# install animation for scroll effects
-npm i gsap
-
-# install Swiper Carousel for swiper for Hero component 
-npm i swiper 
+### Future Improvements
+Add authentication and user roles
+Implement real-time updates (WebSockets)
+Enhance dashboard filtering and analytics
+Deploy with cloud infrastructure
