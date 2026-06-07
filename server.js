@@ -1,27 +1,28 @@
-import express from "express"; 
-import cors from "cors"; 
-// import { v4 as uuidv4 } from 'uuid'; 
+import express from "express";
+import cors from "cors";
+// import { v4 as uuidv4 } from 'uuid';
 import connectDB from './db.js';
 import Prayer from "./models/Prayer.js";
 // import dotenv from "dotenv"; // production env vars
 // dotenv.config(); // load .env
 
 const allowedOrigins = [
-  "https://globalprayerwall.netlify.app", 
+  "https://globalprayerwall.netlify.app",
   "http://localhost:4200",
+    'http://127.0.0.1:4200',
 ]
 
-const app = express(); 
+const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors({origin: allowedOrigins, 
-  methods: ["GET", "POST", "DELETE", "PUT"], 
-  credentials: true, 
-})); 
+app.use(cors({origin: allowedOrigins,
+  methods: ["GET", "POST", "DELETE", "PUT"],
+  credentials: true,
+}));
 app.use(express.json());
 
-// connect to MongoDB 
-connectDB(); 
+// connect to MongoDB
+connectDB();
 
 app.get("/", (req, res) => {
   res.send("🌍 Global Prayer Dashboard API is running");
