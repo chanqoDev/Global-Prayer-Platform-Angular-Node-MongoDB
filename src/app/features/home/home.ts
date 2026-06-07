@@ -1,8 +1,10 @@
-import { AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
 import { register } from 'swiper/element/bundle';
-import type { Swiper } from 'swiper/types';
+// import type { Swiper } from 'swiper/types';
 import gsap from 'gsap'; 
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { FormField } from '../../components/form-component/form-component';
+import { PrayerCards } from '../prayer-cards/prayer-cards';
 
 register();
 
@@ -12,11 +14,13 @@ gsap.registerPlugin(ScrollTrigger);
 @Component({
   selector: 'app-home',
   standalone: true,
+  imports: [FormField, PrayerCards],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class Home implements AfterViewInit {
+  @ViewChild(PrayerCards) prayerCards?: PrayerCards;
 
 
    ngAfterViewInit() {
@@ -44,6 +48,10 @@ export class Home implements AfterViewInit {
 
   onSlideChange() {
     console.log('slide changed');
+  }
+
+  onPrayerAdded() {
+    this.prayerCards?.loadPrayers();
   }
 
 }

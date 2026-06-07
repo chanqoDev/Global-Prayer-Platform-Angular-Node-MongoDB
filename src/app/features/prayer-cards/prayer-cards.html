@@ -1,32 +1,47 @@
-<section class="prayer-cards-container">
-  <h2 class="text-center">Prayer Wall</h2>
-
-  <div class="cards-grid">
-    <div class="prayer-card" *ngFor="let prayer of prayers" [ngClass]="{
-       'urgency-high': prayer.urgency === 'high',
-       'urgency-medium': prayer.urgency === 'medium',
-       'urgency-low': prayer.urgency === 'low'
-    }">
+<section class="prayer-cards-container" aria-label="Prayer cards">
+  <div class="cards-grid" *ngIf="prayers.length; else emptyWall">
+    <article
+      class="prayer-card"
+      *ngFor="let prayer of prayers; let index = index"
+      tabindex="0"
+      [style.animation-delay.ms]="index * 85"
+      [ngClass]="{
+        'urgency-high': prayer.urgency === 'high',
+        'urgency-medium': prayer.urgency === 'medium',
+        'urgency-low': prayer.urgency === 'low'
+      }"
+    >
       <div class="card-inner">
-        <div class="eye">
-      <div class="pupil"></div>
-    </div>
-        <!-- Front -->
-        <div class="card-front">
-          <h3>{{ prayer.name }}</h3>
-          <p>{{ prayer.region }}</p>
-          <span class="urgency-label text-xs"><strong>Urgency:</strong>{{prayer.urgency}}</span>
+        <div class="card-face card-front">
+          <div class="card-topline">
+            <span class="region-chip">{{ prayer.region || 'Global' }}</span>
+            <span class="urgency-dot" aria-hidden="true"></span>
+          </div>
+
+          <div class="avatar" aria-hidden="true">
+            {{ (prayer.name || 'P').slice(0, 1) }}
+          </div>
+
+          <h3>{{ prayer.name || 'Anonymous' }}</h3>
+          <p class="card-date">{{ prayer.dateFormatted || (prayer.createdAt | date:'mediumDate') }}</p>
+          <span class="urgency-label">{{ prayer.urgency || 'low' }} priority</span>
         </div>
 
-        <!-- Back -->
-        <div class="card-back text-center">
-          <p>{{prayer.request}}</p>
-          <!-- <p><strong>Email:</strong> {{ prayer.email }}</p> -->
-          <p><strong>Date:</strong> {{ prayer.dateFormatted || (prayer.createdAt | date:'short') }}</p>
-          <!-- <p><strong>Urgency:</strong> {{ prayer.urgency }}</p> -->
+        <div class="card-face card-back">
+          <p class="request">"{{ prayer.request }}"</p>
+          <div class="back-footer">
+            <span>{{ prayer.region || 'Global' }}</span>
+            <span>{{ prayer.dateFormatted || (prayer.createdAt | date:'short') }}</span>
+          </div>
         </div>
-
       </div>
-    </div>
+    </article>
   </div>
+
+  <ng-template #emptyWall>
+    <div class="empty-wall">
+      <h3>No prayers yet</h3>
+      <p>Submitted prayers will appear here after they are saved.</p>
+    </div>
+  </ng-template>
 </section>

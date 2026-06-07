@@ -1,237 +1,280 @@
-.mat-card-title {
-  font-weight: bold;
-  font-size: 1.1rem;
+:host {
+  display: block;
 }
 
-.mat-card-subtitle {
-  font-size: 0.9rem;
-  color: #666666;
+.prayer-cards-container {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 8px;
 }
 
-.mat-card-content p {
-  margin: 0.5rem 0;
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+  align-items: stretch;
 }
 
 .prayer-card {
-  width: 250px;
-  min-height: 180px;
-  height: auto;       /* allow growth */
-  perspective: 1000px; /* enables 3D */
+  --accent: #0f766e;
+  --accent-soft: #dff7f2;
+  --surface: #ffffff;
+  --ink: #172026;
+  --muted: #5f6f7a;
+  min-height: 270px;
+  border: 0;
+  border-radius: 8px;
+  perspective: 1200px;
+  outline: none;
+  animation: card-rise 620ms ease both, card-drift 6s ease-in-out infinite;
+  transform-origin: center;
 }
 
-.card-front, .card-back {
-  white-space: normal;         /* allow wrapping */
-  overflow-wrap: anywhere;    /* modern: break long words anywhere if needed */
-  word-wrap: break-word;      /* legacy fallback */
-  word-break: break-word;     /* additional fallback */
-  hyphens: auto;              /* optional: insert hyphens where appropriate */
-  padding: 1rem;
-  box-sizing: border-box;
+.prayer-card:nth-child(2n) {
+  animation-duration: 620ms, 7s;
 }
 
-.card-back {
-  padding: 4px; 
+.prayer-card:nth-child(3n) {
+  animation-duration: 620ms, 8s;
+}
+
+.prayer-card:hover,
+.prayer-card:focus-visible {
+  z-index: 2;
 }
 
 .card-inner {
   position: relative;
   width: 100%;
+  min-height: 270px;
   height: 100%;
-  transition: transform 0.8s;
+  transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
   transform-style: preserve-3d;
 }
 
-.prayer-card:hover .card-inner {
-  transform: rotateY(180deg);
+.prayer-card:hover .card-inner,
+.prayer-card:focus-visible .card-inner {
+  transform: rotateY(180deg) translateY(-4px);
 }
 
-.prayer-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  transition: all 0.2s ease-in-out;
-  transform: scale(1.05);
-}
-/* front & back faces */
-.card-front, .card-back {
+.card-face {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  background-color: #fff;
-  color: #333;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  min-height: 270px;
+  padding: 22px;
+  border: 1px solid rgba(23, 32, 38, 0.08);
+  border-radius: 8px;
+  backface-visibility: hidden;
+  background:
+    radial-gradient(circle at top right, var(--accent-soft), transparent 38%),
+    var(--surface);
+  box-shadow: 0 18px 42px rgba(23, 32, 38, 0.11);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.card-face::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-top: 5px solid var(--accent);
+  pointer-events: none;
 }
 
 .card-front {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  font-family: "Bebas Neue", sans-serif; 
-  font-weight: 600;
-  font-style: normal;
+  justify-content: space-between;
 }
+
 .card-back {
+  justify-content: space-between;
   transform: rotateY(180deg);
-  background-color: #f9f9f9; /* differentiate */
-  color: #444;
-}
-.prayer-cards-container {
-  padding: 5rem;
-  background-color: transparent;
-  overflow: hidden; 
-  position: relative;
-}
-.cards-grid:hover {
-  animation-play-state: paused;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(246, 251, 249, 0.98)),
+    var(--surface);
 }
 
-.cards-grid {
+.card-topline,
+.back-footer {
   display: flex;
-  flex-wrap: wrap;         /* allow wrapping to new rows */
-  gap: 1.5rem;
-  justify-content: center; /* center rows */
-  animation: drift 60s linear infinite; 
-}
-/* Pause row drifting when any card inside is hovered */
-.cards-row:hover {
-  animation-play-state: paused;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
-/* Pause card floating when hovered */
-.prayer-card:hover {
-  animation-play-state: paused;
+.region-chip,
+.urgency-label {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 28px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink);
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1.1;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
-.prayer-card {
-  flex: 0 0 250px;         /* fixed card width */
-  background-color: #ffffff;
-  color: #333333;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-  animation: float 6s ease-in-out infinite alternate; /* floating effect */
-}
-
-.cards-row {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 1.5rem;
-  justify-content: center;
-  animation: drift 40s linear infinite alternate;
-  animation-delay: 2s; /* wait 2s before drifting */
-}
-
-.cards-row:nth-child(even) {
-  animation-direction: reverse; /* alternate direction for realism */
-}
-
-/* keyframes for slow drifting to the left */
-@keyframes drift {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(-10%); } /* adjust distance */
-  100% { transform: translateX(0); }
-}
-.prayer-card {
-  animation: float 6s ease-in-out infinite alternate;
-}
-
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(5px); }
-  100% { transform: translateY(0); }
-}
-
-
-.prayer-card::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: -12px;
-  width: 20px;
-  height: 30px;
-  background: #42a1c6;
-  border-radius: 50% 0 0 50%;
-  transform: translateY(-50%);
-}
-.eye {
-  position: absolute;
-  margin-left: 20px;
-  margin-top: 20px;
-  z-index: 1;
-  background-color: #fefae0;
-  border: solid black 1px; 
+.urgency-dot {
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  background: var(--accent);
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 16%, transparent);
+  animation: pulse-dot 2.4s ease-in-out infinite;
 }
 
-.pupil {
-  position: absolute;
-  z-index: 2;
-  margin-left: 2px;
-  margin-top: 2px;
-  background-color: black;
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin-top: 18px;
   border-radius: 50%;
-  height: 10px;
-  width: 10px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 1.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  box-shadow: 0 12px 24px color-mix(in srgb, var(--accent) 26%, transparent);
 }
 
-
-
-@keyframes sway {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(5deg); }
+.card-front h3 {
+  margin: 20px 0 6px;
+  color: var(--ink);
+  font-size: 1.35rem;
+  font-weight: 850;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
 }
 
-.prayer-card::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: -15px;
-  width: 20px;
-  height: 30px;
-  background: #fefae0;
-  border-radius: 50% 0 0 50%;
-  transform: translateY(-50%);
-  animation: sway 3s ease-in-out infinite;
+.card-date {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
-/* High Urgency - Alizarin */
-.urgency-high .card-front {
-  background-color: #ff6b81;
-  color: #000;
+.request {
+  display: -webkit-box;
+  margin: 24px 0;
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 650;
+  line-height: 1.55;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
 }
 
-/* Medium Urgency - Carrot */
-.urgency-medium .card-front {
-  background-color: #fef9c3;
-  color: #000; 
+.back-footer {
+  border-top: 1px solid rgba(23, 32, 38, 0.1);
+  padding-top: 14px;
 }
 
-/* Low Urgency - Emerald */
-.urgency-low .card-front {
-  background-color: #0097e6;
-  color: #000;
+.urgency-high {
+  --accent: #d92d20;
+  --accent-soft: #ffe4df;
 }
 
-/* Alizarin (#e74c3c) — strong but not neon red.
+.urgency-medium {
+  --accent: #b76e00;
+  --accent-soft: #fff1c2;
+}
 
-Alternative: Pomegranate (#c0392b) if you want deeper red.
+.urgency-low {
+  --accent: #087443;
+  --accent-soft: #dff8ea;
+}
 
-🟠 Medium Urgency
+.empty-wall {
+  width: min(520px, 100%);
+  margin: 0 auto;
+  padding: 36px 24px;
+  border: 1px dashed rgba(23, 32, 38, 0.24);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.68);
+  text-align: center;
+}
 
-Carrot (#e67e22) — warm orange, conveys importance without panic.
+.empty-wall h3 {
+  margin: 0 0 8px;
+  color: #172026;
+  font-size: 1.35rem;
+}
 
-Alternative: Pumpkin (#d35400) for extra boldness.
+.empty-wall p {
+  margin: 0;
+  color: #5f6f7a;
+  line-height: 1.6;
+}
 
-🟢 Low Urgency
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.97);
+  }
 
-Emerald (#2ecc71) — soft green, communicates peace and stability.
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
 
-Alternative: Nephritis (#27ae60) for a deeper calm tone. */
+@keyframes card-drift {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 7px;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: scale(1.28);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .prayer-cards-container {
+    width: min(100% - 24px, 420px);
+    padding-top: 20px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prayer-card,
+  .urgency-dot {
+    animation: none;
+  }
+
+  .card-inner {
+    transition: none;
+  }
+}

@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100dvh; /* Full viewport height */
+  width: 100%;
 }
 
 .example-container {
@@ -11,7 +11,7 @@
   padding: 24px;
   box-sizing: border-box;
   background: white;
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   /* overflow-y: auto; */
 }
@@ -20,6 +20,5 @@ mat-form-field {
   width: 100%;
   margin-bottom: 16px;
 }
-
 
 

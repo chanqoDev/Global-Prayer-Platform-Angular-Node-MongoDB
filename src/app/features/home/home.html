@@ -13,14 +13,47 @@
     (swiperprogress)="onProgress($event)"
     (swiperslidechange)="onSlideChange()"
   >
-    <swiper-slide>Slide 1</swiper-slide>
-    <swiper-slide>Slide 2</swiper-slide>
-    <swiper-slide>Slide 3</swiper-slide>
+    <swiper-slide>
+      <div class="hero-slide">
+        <p class="eyebrow">Global Prayer Dashboard</p>
+        <h1>Share a prayer. Join the wall.</h1>
+        <p>Submit a request and see prayers from the global community.</p>
+      </div>
+    </swiper-slide>
+    <swiper-slide>
+      <div class="hero-slide">
+        <p class="eyebrow">Community</p>
+        <h1>Every request has a place.</h1>
+        <p>Prayers are gathered into one shared wall for reflection and support.</p>
+      </div>
+    </swiper-slide>
+    <swiper-slide>
+      <div class="hero-slide">
+        <p class="eyebrow">Prayer Wall</p>
+        <h1>Read, remember, and respond.</h1>
+        <p>Browse recent requests and lift up people across regions.</p>
+      </div>
+    </swiper-slide>
   </swiper-container>
 </div>
 
-<section class="gsap-wrapper">
-  <div class="panel">Section 1</div>
-  <div class="panel">Section 2</div>
-  <div class="panel">Section 3</div>
+<section class="home-prayer-section" aria-labelledby="submit-prayer-title">
+  <div class="section-copy">
+    <p class="eyebrow">Submit a Prayer</p>
+    <h2 id="submit-prayer-title">Add your request to the global prayer wall.</h2>
+    <p>
+      Share what you are praying for, choose the urgency, and your request will be added to the wall after it is submitted.
+    </p>
+  </div>
+
+  <form-component (prayerAdded)="onPrayerAdded()"></form-component>
+</section>
+
+<section class="home-wall-section" aria-labelledby="prayer-wall-title">
+  <div class="wall-header">
+    <p class="eyebrow">Prayer Wall</p>
+    <h2 id="prayer-wall-title">Recent requests from the community</h2>
+  </div>
+
+  <app-prayer-cards></app-prayer-cards>
 </section>
