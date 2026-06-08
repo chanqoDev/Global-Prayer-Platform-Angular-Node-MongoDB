@@ -1,8 +1,8 @@
 <section class="prayer-cards-container" aria-label="Prayer cards">
-  <div class="cards-grid" *ngIf="prayers.length; else emptyWall">
+  <div class="cards-grid" *ngIf="visiblePrayers.length; else emptyWall">
     <article
       class="prayer-card"
-      *ngFor="let prayer of prayers; let index = index"
+      *ngFor="let prayer of visiblePrayers; let index = index"
       tabindex="0"
       [style.animation-delay.ms]="index * 85"
       [ngClass]="{
@@ -35,7 +35,13 @@
           </div>
         </div>
       </div>
-    </article>
+      </article>
+  </div>
+
+  <div class="load-more-row" *ngIf="hasMorePrayers">
+    <button type="button" class="load-more-button" (click)="loadMore()">
+      Load more prayers
+    </button>
   </div>
 
   <ng-template #emptyWall>

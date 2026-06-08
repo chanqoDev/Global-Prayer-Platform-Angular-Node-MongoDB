@@ -12,6 +12,8 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class PrayerCards implements OnInit {
  prayers: any[] = [];
+ visibleCount = 8;
+ readonly pageSize = 8;
 
   constructor(private http: HttpClient) {}
 
@@ -22,9 +24,24 @@ export class PrayerCards implements OnInit {
   loadPrayers() {
     this.http.get<{ data: any[] }>('https://global-prayer-dashboard.onrender.com/api/prayers')
       .subscribe({
-        next: (res) => this.prayers = res.data,
+        next: (res) => {
+          this.prayers = res.data || [];
+          this.visibleCount = Math.min(this.pageSize, this.prayers.length);
+        },
         error: (err) => console.error('❌ Error loading prayers:', err)
       });
+  }
+
+  loadMore(): void {
+    this.visibleCount = Math.min(this.visibleCount + this.pageSize, this.prayers.length);
+  }
+
+  get visiblePrayers(): any[] {
+    return this.prayers.slice(0, this.visibleCount);
+  }
+
+  get hasMorePrayers(): boolean {
+    return this.visibleCount < this.prayers.length;
   }
   
 }
