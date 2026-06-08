@@ -1,8 +1,15 @@
 :host {
+  display: block;
+  width: 100%;
+  background: #0e0a04;
+}
+
+.form-shell {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+  background: #0e0a04;
 }
 
 .example-container {
@@ -51,7 +58,7 @@
 
 .form-header p:not(.form-label) {
   margin: 10px 0 0;
-  color: #c8b48a;
+  color: rgba(200, 175, 130, 0.7);
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.08rem;
   font-style: italic;
@@ -184,7 +191,8 @@ form {
 }
 
 .submit-button:hover:not(:disabled) {
-  background: #b8943e;
+  background: #7B68EE;
+  color: #d4ccff;
 }
 
 .submit-button:disabled {

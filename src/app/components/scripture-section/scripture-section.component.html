@@ -1,0 +1,91 @@
+<section class="section">
+  <div class="verse-layer" aria-hidden="true">
+    <div class="verse-row verse-row-1">
+      <div class="verse-item" *ngFor="let verse of [
+        { text: 'He heals the brokenhearted and binds up their wounds.', ref: 'PSALM 147:3' },
+        { text: 'For nothing will be impossible with God.', ref: 'LUKE 1:37' },
+        { text: 'I can do all things through Christ who strengthens me.', ref: 'PHILIPPIANS 4:13' },
+        { text: 'He heals the brokenhearted and binds up their wounds.', ref: 'PSALM 147:3' },
+        { text: 'For nothing will be impossible with God.', ref: 'LUKE 1:37' },
+        { text: 'I can do all things through Christ who strengthens me.', ref: 'PHILIPPIANS 4:13' }
+      ]">
+        <span class="verse-text">{{ verse.text }}</span>
+        <span class="verse-ref">{{ verse.ref }}</span>
+      </div>
+    </div>
+
+    <div class="verse-row verse-row-2">
+      <div class="verse-item" *ngFor="let verse of [
+        { text: 'So if the Son sets you free, you will be free indeed.', ref: 'JOHN 8:36' },
+        { text: 'Your word is a lamp to my feet and a light to my path.', ref: 'PSALM 119:105' },
+        { text: 'And we know that all things work together for good.', ref: 'ROMANS 8:28' },
+        { text: 'So if the Son sets you free, you will be free indeed.', ref: 'JOHN 8:36' },
+        { text: 'Your word is a lamp to my feet and a light to my path.', ref: 'PSALM 119:105' },
+        { text: 'And we know that all things work together for good.', ref: 'ROMANS 8:28' }
+      ]">
+        <span class="verse-text">{{ verse.text }}</span>
+        <span class="verse-ref">{{ verse.ref }}</span>
+      </div>
+    </div>
+
+    <div class="verse-row verse-row-3">
+      <div class="verse-item" *ngFor="let verse of [
+        { text: 'Fear not, for I am with you; be not dismayed, for I am your God.', ref: 'ISAIAH 41:10' },
+        { text: 'The Lord is my shepherd; I shall not want.', ref: 'PSALM 23:1' },
+        { text: 'Cast all your anxiety on him because he cares for you.', ref: '1 PETER 5:7' },
+        { text: 'Fear not, for I am with you; be not dismayed, for I am your God.', ref: 'ISAIAH 41:10' },
+        { text: 'The Lord is my shepherd; I shall not want.', ref: 'PSALM 23:1' },
+        { text: 'Cast all your anxiety on him because he cares for you.', ref: '1 PETER 5:7' }
+      ]">
+        <span class="verse-text">{{ verse.text }}</span>
+        <span class="verse-ref">{{ verse.ref }}</span>
+      </div>
+    </div>
+
+    <div class="verse-row verse-row-4">
+      <div class="verse-item" *ngFor="let verse of [
+        { text: 'The name of the Lord is a strong tower.', ref: 'PROVERBS 18:10' },
+        { text: 'Come to me, all who are weary, and I will give you rest.', ref: 'MATTHEW 11:28' },
+        { text: 'He restores my soul.', ref: 'PSALM 23:3' },
+        { text: 'The name of the Lord is a strong tower.', ref: 'PROVERBS 18:10' },
+        { text: 'Come to me, all who are weary, and I will give you rest.', ref: 'MATTHEW 11:28' },
+        { text: 'He restores my soul.', ref: 'PSALM 23:3' }
+      ]">
+        <span class="verse-text">{{ verse.text }}</span>
+        <span class="verse-ref">{{ verse.ref }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" aria-hidden="true"></div>
+
+  <header class="header">
+    <p class="label">THE WORD</p>
+  </header>
+
+  <div class="content">
+    <div class="ghost-verse" aria-hidden="true">
+      <span class="ghost-text" id="gv1">
+        "Come to me, all who are weary, and I will give you rest."
+        <span class="ghost-ref">MATTHEW 11:28</span>
+      </span>
+      <span class="ghost-text" id="gv2">
+        "The Lord is close to the brokenhearted."
+        <span class="ghost-ref">PSALM 34:18</span>
+      </span>
+      <span class="ghost-text" id="gv3">
+        "He will cover you with his feathers."
+        <span class="ghost-ref">PSALM 91:4</span>
+      </span>
+      <span class="ghost-text" id="gv4">
+        "I have called you by name; you are mine."
+        <span class="ghost-ref">ISAIAH 43:1</span>
+      </span>
+    </div>
+
+    <div class="focal">
+      <p class="focal-verse">Be still, and know that I am God.</p>
+      <span class="focal-ref">PSALM 46:10</span>
+    </div>
+  </div>
+</section>

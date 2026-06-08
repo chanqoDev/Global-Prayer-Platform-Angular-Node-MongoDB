@@ -1,6 +1,50 @@
 <section class="section">
   <div class="real-bg" aria-hidden="true"></div>
 
+  <div class="wall-verse-layer" aria-hidden="true">
+    <div class="wall-verse-row wvr1">
+      <div class="wall-verse-item" *ngFor="let verse of [
+        { text: 'Hear my prayer, O Lord', ref: 'PSALM 143:1' },
+        { text: 'Out of the depths I cry to you', ref: 'PSALM 130:1' },
+        { text: 'Let my cry come before you', ref: 'PSALM 119:169' },
+        { text: 'Hear my prayer, O Lord', ref: 'PSALM 143:1' },
+        { text: 'Out of the depths I cry to you', ref: 'PSALM 130:1' },
+        { text: 'Let my cry come before you', ref: 'PSALM 119:169' }
+      ]">
+        <span class="wall-verse-text">{{ verse.text }}</span>
+        <span class="wall-verse-ref">{{ verse.ref }}</span>
+      </div>
+    </div>
+
+    <div class="wall-verse-row wvr2">
+      <div class="wall-verse-item" *ngFor="let verse of [
+        { text: 'I lift my eyes to the hills', ref: 'PSALM 121:1' },
+        { text: 'My soul waits in silence', ref: 'PSALM 62:1' },
+        { text: 'Into your hands I commit my spirit', ref: 'PSALM 31:5' },
+        { text: 'I lift my eyes to the hills', ref: 'PSALM 121:1' },
+        { text: 'My soul waits in silence', ref: 'PSALM 62:1' },
+        { text: 'Into your hands I commit my spirit', ref: 'PSALM 31:5' }
+      ]">
+        <span class="wall-verse-text">{{ verse.text }}</span>
+        <span class="wall-verse-ref">{{ verse.ref }}</span>
+      </div>
+    </div>
+
+    <div class="wall-verse-row wvr3">
+      <div class="wall-verse-item" *ngFor="let verse of [
+        { text: 'How long, O Lord?', ref: 'PSALM 13:1' },
+        { text: 'You are my hiding place', ref: 'PSALM 32:7' },
+        { text: 'Create in me a clean heart', ref: 'PSALM 51:10' },
+        { text: 'How long, O Lord?', ref: 'PSALM 13:1' },
+        { text: 'You are my hiding place', ref: 'PSALM 32:7' },
+        { text: 'Create in me a clean heart', ref: 'PSALM 51:10' }
+      ]">
+        <span class="wall-verse-text">{{ verse.text }}</span>
+        <span class="wall-verse-ref">{{ verse.ref }}</span>
+      </div>
+    </div>
+  </div>
+
   <div class="content">
     <header class="header">
       <p class="label">Prayer Wall</p>
@@ -8,7 +52,7 @@
       <p class="subtitle">Hover a stone to reveal a prayer</p>
     </header>
 
-    <div class="wall-state" *ngIf="isLoading">Loading prayers...</div>
+    <div class="wall-state" *ngIf="isLoading">Loading 🕊 247 prayers submitted...</div>
 
     <div class="wall-state" *ngIf="!isLoading && hasError">
       Prayer requests could not be loaded right now.
@@ -79,7 +123,9 @@
               </div>
 
               <div class="priority-row">
-                <span class="priority">{{ prayer.priority }} priority</span>
+                <span class="priority-badge" [ngClass]="prayer.priority">
+                  {{ prayer.priority }} priority
+                </span>
               </div>
             </div>
           </div>

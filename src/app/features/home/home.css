@@ -1,6 +1,9 @@
 .hero swiper-container {
   width: 100%;
   height: 420px;
+  --swiper-navigation-color: #c9a84c;
+  --swiper-pagination-color: #c9a84c;
+  --swiper-pagination-bullet-inactive-color: rgba(201, 168, 76, 0.3);
 }
 
 .hero swiper-slide {
@@ -12,6 +15,27 @@
 
 .hero {
   background: #120b05;
+}
+
+.hero swiper-container::part(button-prev),
+.hero swiper-container::part(button-next) {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 50%;
+  background: transparent;
+  color: #c9a84c;
+}
+
+.hero swiper-container::part(button-prev)::after,
+.hero swiper-container::part(button-next)::after {
+  color: #c9a84c;
+  font-size: 14px;
+}
+
+.hero swiper-container::part(pagination) {
+  --swiper-pagination-color: #c9a84c;
+  --swiper-pagination-bullet-inactive-color: rgba(201, 168, 76, 0.3);
 }
 
 .hero-slide {
@@ -56,7 +80,7 @@
   align-items: center;
   justify-content: center;
   padding: 72px clamp(20px, 6vw, 88px);
-  background: #ffffff;
+  background: #0e0a04;
 }
 
 .section-copy {
@@ -82,13 +106,21 @@
   font-weight: 700;
   line-height: 1.05;
 }
-
+/* gold #c9a84c */
 .section-copy p:not(.eyebrow) {
   margin: 0;
   color: #5a4a3a;
   font-size: 15px;
   line-height: 1.7;
 }
+
+/* #submit-prayer-title{
+  color:#c9a84c;
+}
+
+.prayer-body{
+color:rgba(200,175,130,0.7);
+} */
 
 .home-wall-section {
   padding: 72px 0 88px;
@@ -104,6 +136,10 @@
 
 .home-wall-section app-prayer-cards {
   display: block;
+}
+
+#submit-prayer-title {
+  color:#f0e4c8
 }
 
 @media (max-width: 860px) {

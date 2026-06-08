@@ -46,6 +46,15 @@ export class PrayerWallComponent implements OnInit {
   isLoading = true;
   hasError = false;
   animatingActions = new Set<string>();
+  private localState = new Map<
+    string,
+    {
+      prayedCount: number;
+      candleCount: number;
+      userPrayed: boolean;
+      userCandled: boolean;
+    }
+  >();
 
   private readonly apiUrl = 'https://global-prayer-dashboard.onrender.com/api/prayers';
   private readonly interactionApiBase = 'https://global-prayer-dashboard.onrender.com';
@@ -62,7 +71,9 @@ export class PrayerWallComponent implements OnInit {
 
     this.http.get<{ data: ApiPrayerRequest[] }>(this.apiUrl).subscribe({
       next: (res) => {
-        this.prayers = (res.data || []).map((prayer, index) => this.toPrayerRequest(prayer, index));
+        this.prayers = this.applyLocalState(
+          (res.data || []).map((prayer, index) => this.toPrayerRequest(prayer, index)),
+        );
         this.isLoading = false;
       },
       error: (err) => {
@@ -120,6 +131,7 @@ export class PrayerWallComponent implements OnInit {
       error: (err) => {
         console.error(`Error updating ${action} interaction:`, err);
         this.applyInteraction(prayer, action, wasActive, -delta);
+        this.saveLocalState(prayer);
       },
     });
   }
@@ -133,11 +145,31 @@ export class PrayerWallComponent implements OnInit {
     if (action === 'pray') {
       prayer.userPrayed = active;
       prayer.prayedCount = Math.max(0, prayer.prayedCount + delta);
+      this.saveLocalState(prayer);
       return;
     }
 
     prayer.userCandled = active;
     prayer.candleCount = Math.max(0, prayer.candleCount + delta);
+    this.saveLocalState(prayer);
+  }
+
+  private saveLocalState(prayer: PrayerRequest) {
+    const key = prayer.backendId || String(prayer.id);
+    this.localState.set(key, {
+      prayedCount: prayer.prayedCount,
+      candleCount: prayer.candleCount,
+      userPrayed: prayer.userPrayed,
+      userCandled: prayer.userCandled,
+    });
+  }
+
+  private applyLocalState(prayers: PrayerRequest[]): PrayerRequest[] {
+    return prayers.map((prayer) => {
+      const key = prayer.backendId || String(prayer.id);
+      const local = this.localState.get(key);
+      return local ? { ...prayer, ...local } : prayer;
+    });
   }
 
   private animateAction(prayer: PrayerRequest, action: 'pray' | 'candle') {

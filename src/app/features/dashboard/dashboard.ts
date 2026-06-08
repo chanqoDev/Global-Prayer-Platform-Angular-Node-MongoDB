@@ -16,7 +16,7 @@ export class DashboardComponent implements AfterViewInit {
     fetch("https://global-prayer-dashboard.onrender.com/api/prayers") // backend endpoint :  http://localhost:4000/api/prayers
     .then(res => res.json())
     .then(json => {
-      const prayers = json.data; 
+      const prayers = json.data;
       const total = prayers.length;
       const prayed = prayers.filter((p: any) => p.userPrayed).length;
       const missingPrayer = prayers.filter((p: any) => p.userCandled).length;

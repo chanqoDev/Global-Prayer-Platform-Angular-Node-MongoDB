@@ -1,0 +1,9 @@
+<section class="marquee-wrapper" aria-label="Sacred marquee">
+  <div class="marquee-track">
+    <span class="marquee-item" *ngFor="let item of items.concat(items)">
+      <span class="hebrew">{{ item.hebrew }}</span>
+      <span class="separator">·</span>
+      <span class="english">{{ item.english }}</span>
+    </span>
+  </div>
+</section>

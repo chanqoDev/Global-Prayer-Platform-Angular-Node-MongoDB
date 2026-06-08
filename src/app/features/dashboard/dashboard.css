@@ -89,43 +89,6 @@
   box-shadow: 0 24px 58px rgba(0, 0, 0, 0.22);
 }
 
-:host ::ng-deep .gridjs-container {
-  color: #f0e4c8;
-  font-family: 'Cormorant Garamond', serif;
-}
-
-:host ::ng-deep .gridjs-wrapper {
-  border: 1px solid rgba(201, 168, 76, 0.16);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-:host ::ng-deep .gridjs-th,
-:host ::ng-deep .gridjs-td {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: rgba(201, 168, 76, 0.14);
-  color: #f0e4c8;
-}
-
-:host ::ng-deep .gridjs-th {
-  background: rgba(201, 168, 76, 0.08);
-  font-family: 'Cinzel', serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-:host ::ng-deep .gridjs-search-input,
-:host ::ng-deep .gridjs-pagination .gridjs-pagination-button {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(201, 168, 76, 0.2);
-  color: #f0e4c8;
-}
-
-:host ::ng-deep .gridjs-search-input::placeholder {
-  color: rgba(200, 180, 138, 0.55);
-}
-
 @media (max-width: 840px) {
   .stats-grid {
     grid-template-columns: 1fr;

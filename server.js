@@ -9,16 +9,21 @@ import Prayer from "./models/Prayer.js";
 const allowedOrigins = [
   "https://globalprayerwall.netlify.app",
   "http://localhost:4200",
-    'http://127.0.0.1:4200',
-]
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+];
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors({origin: allowedOrigins,
-  methods: ["GET", "POST", "DELETE", "PUT"],
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
+    credentials: true,
+  }),
+);
+app.options(/.*/, cors());
 app.use(express.json());
 
 // connect to MongoDB

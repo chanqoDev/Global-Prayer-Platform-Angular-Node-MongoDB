@@ -3,7 +3,6 @@
     slides-per-view="3"
     space-between="10"
     centered-slides="true"
-    pagination="true"
     navigation="true"
     breakpoints='{
       "0": { "slidesPerView": 1 },
@@ -37,11 +36,16 @@
   </swiper-container>
 </div>
 
+<app-scripture-marquee></app-scripture-marquee>
+<app-prayer-wall></app-prayer-wall>
+
+<app-scripture-section></app-scripture-section>
+
 <section class="home-prayer-section" aria-labelledby="submit-prayer-title">
   <div class="section-copy">
     <p class="submit-label">SUBMIT A PRAYER</p>
     <h2 id="submit-prayer-title">Add your request to the global prayer wall.</h2>
-    <p>
+    <p class="prayer-body">
       Share what you are praying for, choose the urgency, and your request will be added to the wall after it is submitted.
     </p>
   </div>
@@ -49,4 +53,4 @@
   <form-component (prayerAdded)="onPrayerAdded()"></form-component>
 </section>
 
-<app-prayer-wall></app-prayer-wall>
+
