@@ -1,8 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
-// import { Hero } from './components/hero/hero';
-// Reimplement hero to homepage instead 
 
 @Component({
   selector: 'app-root',

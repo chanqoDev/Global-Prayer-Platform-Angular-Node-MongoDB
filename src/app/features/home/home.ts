@@ -23,6 +23,38 @@ export class Home implements AfterViewInit {
   @ViewChild(PrayerWallComponent) prayerWall?: PrayerWallComponent;
 
    ngAfterViewInit() {
+    const swiperEl = document.querySelector('.hero swiper-container') as any;
+    if (swiperEl && !swiperEl.injectStyles?.length) {
+      swiperEl.injectStyles = [
+        `
+          .swiper-button-prev,
+          .swiper-button-next {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            border-radius: 50%;
+            background: transparent;
+            color: #c9a84c;
+          }
+
+          .swiper-button-prev::after,
+          .swiper-button-next::after {
+            color: #c9a84c;
+            font-size: 14px;
+          }
+
+          .swiper-pagination-bullet {
+            background: rgba(201, 168, 76, 0.3);
+            opacity: 1;
+          }
+
+          .swiper-pagination-bullet-active {
+            background: #c9a84c;
+          }
+        `,
+      ];
+    }
+
     const panels = gsap.utils.toArray<HTMLElement>('.panel');
 
     panels.forEach((panel, i) => {

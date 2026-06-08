@@ -1,13 +1,12 @@
-<nav class="flex items-center justify-between p-4 bg-primary-600 text-black rounded-sm shadow-md sticky top-0 z-50 ">
-  <div class="text-2xl font-display">
-   <img src="assets/globalPrayerLogoTransparentv1.png" alt="Logo" class="inline-block h-14 m-0 w-auto mr-2 rounded-md">
-  </div>
-  <div class="space-x-4 pr-4">
-    <a routerLink="/" routerLinkActive="text-secondary-500" class="hover:text-secondary-500">Home</a>
-    <a routerLink="/about" routerLinkActive="hover:text-secondary-500" class="hover:text-secondary-500">About</a>
-    <a routerLink="/dashboard" routerLinkActive="hover:text-secondary-500" class="hover:text-secondary-500">Dashboard</a>
-    <!-- <a routerLink="#Request" class="bg-secondary-200 border text-black font-semibold px-4 py-2 rounded hover:bg-primary-700 hover:text-white transition-colors duration-200">
-  Requests
-</a> -->
+<nav class="nav-shell">
+  <a routerLink="/" class="brand-mark" aria-label="Global Prayer Dashboard home">
+    <span class="brand-eyebrow">Prayer Wall</span>
+    <span class="brand-name">Global Prayer Dashboard</span>
+  </a>
+
+  <div class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/about" routerLinkActive="active">About</a>
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
   </div>
 </nav>

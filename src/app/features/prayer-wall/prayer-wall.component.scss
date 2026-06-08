@@ -3,8 +3,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: auto;
+  height: auto;
   padding: 60px 24px;
+  padding-bottom: 80px;
   overflow: hidden;
   color: #f0e4c8;
 }
@@ -57,21 +59,14 @@
   text-transform: uppercase;
 }
 
-.header h2 {
+.header-title {
   margin: 0;
-  color: #f0e4c8;
   font-family: 'Cinzel', serif;
-  font-size: clamp(2.2rem, 5vw, 4.25rem);
+  font-size: clamp(28px, 4vw, 48px);
   font-weight: 600;
-  line-height: 1.05;
-}
-
-.subtitle {
-  margin: 14px 0 0;
-  color: #c8b48a;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.35rem;
-  font-style: italic;
+  color: #f0e4c8;
+  letter-spacing: 0.05em;
+  text-align: center;
 }
 
 .cards-grid {
@@ -80,6 +75,7 @@
   gap: 20px;
   max-width: 960px;
   margin: 0 auto;
+  padding-bottom: 40px;
 }
 
 .wall-state {
@@ -341,6 +337,7 @@
 @media (max-width: 560px) {
   .section {
     padding: 52px 16px;
+    padding-bottom: 80px;
   }
 
   .cards-grid {

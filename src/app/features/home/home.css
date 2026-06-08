@@ -1,18 +1,17 @@
 .hero swiper-container {
   width: 100%;
-  height: 520px;
+  height: 420px;
 }
 
 .hero swiper-slide {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f4f8fb;
-  color: #172026;
+  color: #f0e4c8;
 }
 
 .hero {
-  background: #ffffff;
+  background: #120b05;
 }
 
 .hero-slide {
@@ -23,56 +22,72 @@
 .hero-slide h1 {
   margin: 0 auto 16px;
   max-width: 780px;
-  color: #172026;
-  font-size: clamp(2.25rem, 6vw, 4.75rem);
-  font-weight: 800;
+  color: #f0e4c8;
+  font-size: clamp(32px, 5vw, 56px);
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
   line-height: 1;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.8);
 }
 
 .hero-slide p {
   margin: 0 auto;
   max-width: 620px;
-  color: #51616d;
-  font-size: 1.125rem;
+  color: #b89b6a;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
   line-height: 1.7;
 }
 
 .eyebrow {
   margin-bottom: 12px;
-  color: #0f766e;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0;
+  color: #c9a84c;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
 }
 
 .home-prayer-section {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(320px, 500px);
-  gap: 48px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 60px;
   align-items: center;
+  justify-content: center;
   padding: 72px clamp(20px, 6vw, 88px);
   background: #ffffff;
 }
 
 .section-copy {
-  max-width: 620px;
+  max-width: 520px;
+  justify-self: end;
+}
+
+.submit-label {
+  margin: 0 0 14px;
+  color: #c9a84c;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
 }
 
 .section-copy h2,
 .wall-header h2 {
   margin: 0 0 16px;
-  color: #172026;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 800;
+  color: #1a1208;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 700;
   line-height: 1.05;
 }
 
 .section-copy p:not(.eyebrow) {
   margin: 0;
-  color: #51616d;
-  font-size: 1.05rem;
-  line-height: 1.8;
+  color: #5a4a3a;
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 .home-wall-section {
@@ -105,5 +120,15 @@
   .section-copy {
     max-width: none;
     text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-prayer-section {
+    grid-template-columns: 1fr;
+  }
+
+  .section-copy {
+    justify-self: center;
   }
 }
