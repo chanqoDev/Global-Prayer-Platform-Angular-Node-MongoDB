@@ -1,0 +1,52 @@
+<section class="section">
+  <div class="real-bg" aria-hidden="true"></div>
+
+  <div class="content">
+    <header class="header">
+      <p class="label">Prayer Wall</p>
+      <h2>Recent requests from the community</h2>
+      <p class="subtitle">Hover a stone to reveal a prayer</p>
+    </header>
+
+    <div class="wall-state" *ngIf="isLoading">Loading prayers...</div>
+
+    <div class="wall-state" *ngIf="!isLoading && hasError">
+      Prayer requests could not be loaded right now.
+    </div>
+
+    <div class="wall-state" *ngIf="!isLoading && !hasError && !prayers.length">
+      No prayer requests have been submitted yet.
+    </div>
+
+    <div class="cards-grid" *ngIf="!isLoading && !hasError && prayers.length">
+      <article class="flip-card" *ngFor="let prayer of prayers">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <span class="stone-label">Prayer Stone</span>
+          </div>
+
+          <div class="flip-face flip-back">
+            <div class="top-row">
+              <span class="country-badge">{{ prayer.country }}</span>
+              <span class="status-dot" [class.active]="prayer.active"></span>
+            </div>
+
+            <div class="person-row">
+              <div class="avatar">{{ prayer.initial }}</div>
+              <div>
+                <h3>{{ prayer.name }}</h3>
+                <p class="date">{{ prayer.date }}</p>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <p class="prayer-text">{{ prayer.prayerText }}</p>
+
+            <span class="priority">{{ prayer.priority }} priority</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

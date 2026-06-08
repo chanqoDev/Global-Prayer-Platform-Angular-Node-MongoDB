@@ -4,7 +4,7 @@ import { register } from 'swiper/element/bundle';
 import gsap from 'gsap'; 
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { FormField } from '../../components/form-component/form-component';
-import { PrayerCards } from '../prayer-cards/prayer-cards';
+import { PrayerWallComponent } from '../prayer-wall/prayer-wall.component';
 
 register();
 
@@ -14,14 +14,13 @@ gsap.registerPlugin(ScrollTrigger);
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormField, PrayerCards],
+  imports: [FormField, PrayerWallComponent],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class Home implements AfterViewInit {
-  @ViewChild(PrayerCards) prayerCards?: PrayerCards;
-
+  @ViewChild(PrayerWallComponent) prayerWall?: PrayerWallComponent;
 
    ngAfterViewInit() {
     const panels = gsap.utils.toArray<HTMLElement>('.panel');
@@ -51,7 +50,7 @@ export class Home implements AfterViewInit {
   }
 
   onPrayerAdded() {
-    this.prayerCards?.loadPrayers();
+    this.prayerWall?.loadPrayers();
   }
 
 }

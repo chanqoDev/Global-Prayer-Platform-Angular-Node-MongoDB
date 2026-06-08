@@ -1,0 +1,255 @@
+.section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 60px 24px;
+  overflow: hidden;
+  color: #f0e4c8;
+}
+
+.real-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/PWALL.jpg');
+  background-position: center;
+  background-size: cover;
+  filter: brightness(0.45);
+  transform: scale(1.02);
+}
+
+.real-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(10, 7, 3, 0.82), transparent 32%, rgba(10, 7, 3, 0.9)),
+    linear-gradient(to right, rgba(10, 7, 3, 0.58), rgba(10, 7, 3, 0.18), rgba(10, 7, 3, 0.58));
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1040px);
+}
+
+.header {
+  max-width: 760px;
+  margin: 0 auto 38px;
+  text-align: center;
+}
+
+.label,
+.country-badge,
+.priority,
+.stone-label,
+.avatar {
+  font-family: 'Cinzel', serif;
+}
+
+.label {
+  margin: 0 0 12px;
+  color: #c9a84c;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 0;
+  color: #f0e4c8;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.2rem, 5vw, 4.25rem);
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.subtitle {
+  margin: 14px 0 0;
+  color: #c8b48a;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-style: italic;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.wall-state {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 22px 24px;
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  border-radius: 8px;
+  background: rgba(20, 14, 6, 0.68);
+  backdrop-filter: blur(10px);
+  color: #f0e4c8;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.flip-card {
+  height: 240px;
+  perspective: 1000px;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.flip-card:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.flip-front {
+  justify-content: flex-end;
+  padding: 18px;
+  border: 1px solid rgba(240, 228, 200, 0.16);
+  background:
+    linear-gradient(135deg, rgba(240, 228, 200, 0.08), rgba(58, 45, 25, 0.18)),
+    rgba(255, 255, 255, 0.03);
+  box-shadow:
+    inset 0 1px 18px rgba(255, 255, 255, 0.08),
+    inset 0 -18px 36px rgba(16, 10, 4, 0.22);
+}
+
+.stone-label {
+  color: rgba(240, 228, 200, 0.46);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.flip-back {
+  justify-content: space-between;
+  padding: 18px;
+  border: 1px solid rgba(201, 168, 76, 0.55);
+  background: rgba(20, 14, 6, 0.88);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.42);
+  transform: rotateY(180deg);
+}
+
+.top-row,
+.person-row {
+  display: flex;
+  align-items: center;
+}
+
+.top-row {
+  justify-content: space-between;
+  min-height: 22px;
+}
+
+.country-badge {
+  color: #c9a84c;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.status-dot.active {
+  background: #46d17a;
+  box-shadow: 0 0 12px rgba(70, 209, 122, 0.9);
+}
+
+.person-row {
+  gap: 12px;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0f7a4b, #48b878);
+  color: #f0e4c8;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.person-row h3 {
+  margin: 0;
+  color: #f0e4c8;
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.date {
+  margin: 3px 0 0;
+  color: #c8b48a;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.92rem;
+  font-style: italic;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+}
+
+.prayer-text {
+  display: -webkit-box;
+  margin: 0;
+  color: #f0e4c8;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.08rem;
+  font-style: italic;
+  line-height: 1.3;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.priority {
+  align-self: flex-start;
+  color: #b89b6a;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+@media (max-width: 560px) {
+  .section {
+    padding: 52px 16px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
