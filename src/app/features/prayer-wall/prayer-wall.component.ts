@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 export interface PrayerRequest {
@@ -41,7 +41,7 @@ interface ApiPrayerRequest {
   styleUrl: './prayer-wall.component.scss',
 })
 export class PrayerWallComponent implements OnInit {
-  @Input() prayers: PrayerRequest[] = [];
+  prayers: PrayerRequest[] = [];
 
   isLoading = true;
   hasError = false;
