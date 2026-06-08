@@ -75,6 +75,42 @@ app.delete("/api/prayers/:id", async (req, res) => {
   }
 });
 
+app.patch("/prayer-requests/:id/pray", async (req, res) => {
+  try {
+    const prayer = await Prayer.findById(req.params.id);
+    if (!prayer) {
+      return res.status(404).json({ error: "Prayer not found" });
+    }
+
+    prayer.userPrayed = !prayer.userPrayed;
+    prayer.prayedCount = Math.max(0, (prayer.prayedCount || 0) + (prayer.userPrayed ? 1 : -1));
+    await prayer.save();
+
+    res.json({ message: "Prayer prayed state updated", data: prayer });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+app.patch("/prayer-requests/:id/candle", async (req, res) => {
+  try {
+    const prayer = await Prayer.findById(req.params.id);
+    if (!prayer) {
+      return res.status(404).json({ error: "Prayer not found" });
+    }
+
+    prayer.userCandled = !prayer.userCandled;
+    prayer.candleCount = Math.max(0, (prayer.candleCount || 0) + (prayer.userCandled ? 1 : -1));
+    await prayer.save();
+
+    res.json({ message: "Prayer candle state updated", data: prayer });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 // spin up server
 app.listen(PORT, () => {
       console.log(`🚀 Server running at http://localhost:${PORT}`);

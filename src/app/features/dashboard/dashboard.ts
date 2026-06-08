@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ElementRef } from '@angular/core';
 import { Grid } from 'gridjs';
 
 
@@ -6,7 +6,8 @@ import { Grid } from 'gridjs';
   selector: 'app-dashboard',
   standalone: true,
   imports: [],
-  templateUrl: '../../features/dashboard/dashboard.html',
+  templateUrl: './dashboard.html',
+  styleUrls: ['./dashboard.css'],
 })
 export class DashboardComponent implements AfterViewInit {
   constructor(private el: ElementRef) {}
@@ -16,14 +17,19 @@ export class DashboardComponent implements AfterViewInit {
     .then(res => res.json())
     .then(json => {
       const prayers = json.data; 
+      const total = prayers.length;
+      const prayed = prayers.filter((p: any) => p.userPrayed).length;
+      const missingPrayer = prayers.filter((p: any) => p.userCandled).length;
     
      new Grid({
-          columns: ['Name', 'Prayer Request', 'Date', 'Urgency'],
+          columns: ['Name', 'Prayer Request', 'Date', 'Priority', 'Prayed', 'Candle'],
           data: prayers.map((p: any) => [
             p.name,
             p.request,
             new Date(p.createdAt).toLocaleString(), // readable date
-            p.urgency
+            p.urgency,
+            p.userPrayed ? 'Yes' : 'No',
+            p.userCandled ? 'Yes' : 'No'
           ]),
           search: true,
           sort: true,
@@ -31,6 +37,13 @@ export class DashboardComponent implements AfterViewInit {
           height: '400px',
           pagination: { limit: 4 },
         }).render(this.el.nativeElement.querySelector('#prayerGrid'));
+
+      const totalNode = this.el.nativeElement.querySelector('#totalPrayers');
+      const prayedNode = this.el.nativeElement.querySelector('#prayedCount');
+      const missingNode = this.el.nativeElement.querySelector('#missingPrayerCount');
+      if (totalNode) totalNode.textContent = String(total);
+      if (prayedNode) prayedNode.textContent = String(prayed);
+      if (missingNode) missingNode.textContent = String(missingPrayer);
       })
       .catch(err => console.error('❌ Error loading prayers:', err));
   }

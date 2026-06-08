@@ -1,4 +1,30 @@
-<section class="p-6">
-  <h2 class="text-xl font-bold mb-4">Received Prayers</h2>
-  <div id="prayerGrid"></div>
+<section class="dashboard-shell">
+  <div class="dashboard-bg" aria-hidden="true"></div>
+
+  <div class="dashboard-content">
+    <header class="dashboard-header">
+      <p class="eyebrow">Prayer Dashboard</p>
+      <h1>Recent requests from the wall</h1>
+      <p class="subhead">A live view of the community’s prayers, urgency, and response.</p>
+    </header>
+
+    <div class="stats-grid">
+      <article class="stat-card">
+        <span class="stat-label">Total prayers</span>
+        <strong id="totalPrayers">0</strong>
+      </article>
+      <article class="stat-card">
+        <span class="stat-label">Prayed</span>
+        <strong id="prayedCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span class="stat-label">Missing prayer</span>
+        <strong id="missingPrayerCount">0</strong>
+      </article>
+    </div>
+
+    <div class="table-frame">
+      <div id="prayerGrid"></div>
+    </div>
+  </div>
 </section>

@@ -16,10 +16,10 @@ const prayerSchema = new mongoose.Schema({
     default: "low",
     required: true 
   },
-  region: { 
-  type: String,
-  required: true
-  },
+  userPrayed: { type: Boolean, default: false },
+  userCandled: { type: Boolean, default: false },
+  prayedCount: { type: Number, default: 0 },
+  candleCount: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now }
 });
 
