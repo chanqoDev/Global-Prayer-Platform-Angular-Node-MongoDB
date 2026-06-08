@@ -145,7 +145,8 @@
 }
 
 .flip-back {
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 12px;
   padding: 18px;
   border: 1px solid rgba(201, 168, 76, 0.55);
   background: rgba(20, 14, 6, 0.88);
@@ -237,18 +238,19 @@
 
 .interaction-bar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  border-top: 1px solid rgba(180, 140, 70, 0.15);
-  padding-top: 12px;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid rgba(180, 140, 70, 0.2);
+  padding-top: 10px;
+  margin-top: auto;
 }
 
-.actions {
+.actions-row {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 16px;
-  min-width: 0;
+  justify-content: flex-start;
 }
 
 .action-button {
@@ -258,19 +260,22 @@
   border: none;
   padding: 0;
   background: none;
-  color: #c9a84c;
   cursor: pointer;
   font-family: 'Cinzel', serif;
   font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   line-height: 1;
   text-transform: uppercase;
   transition: opacity 160ms ease;
 }
 
+.action-button:hover {
+  opacity: 0.8;
+}
+
 .action-button.active {
-  opacity: 0.6;
+  opacity: 0.55;
 }
 
 .action-button i {
@@ -288,17 +293,34 @@
   letter-spacing: 0;
 }
 
+.prayed-action,
+.prayed-action .action-count,
+.prayed-action .action-label,
+.prayed-action i {
+  color: #c9a84c;
+}
+
 .candle-action {
   color: #8a7558;
 }
 
+.candle-action .action-count,
+.candle-action .action-label,
+.candle-action i {
+  color: #8a7558;
+}
+
+.priority-row {
+  border-top: 1px solid rgba(180, 140, 70, 0.12);
+  padding-top: 6px;
+}
+
 .priority {
-  flex: 0 0 auto;
-  color: #b89b6a;
+  color: rgba(180, 140, 70, 0.4);
   font-family: 'Cinzel', serif;
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
@@ -323,10 +345,5 @@
 
   .cards-grid {
     grid-template-columns: 1fr;
-  }
-
-  .interaction-bar {
-    align-items: flex-start;
-    flex-direction: column;
   }
 }
