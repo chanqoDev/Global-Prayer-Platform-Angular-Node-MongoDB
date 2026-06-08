@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 export interface PrayerRequest {
   id: number;
+  backendId?: string;
   country: string;
   initial: string;
   name: string;
@@ -11,6 +12,10 @@ export interface PrayerRequest {
   prayerText: string;
   priority: 'low' | 'medium' | 'high';
   active: boolean;
+  prayedCount: number;
+  candleCount: number;
+  userPrayed: boolean;
+  userCandled: boolean;
 }
 
 interface ApiPrayerRequest {
@@ -22,6 +27,10 @@ interface ApiPrayerRequest {
   dateFormatted?: string;
   createdAt?: string;
   urgency?: 'low' | 'medium' | 'high';
+  prayedCount?: number;
+  candleCount?: number;
+  userPrayed?: boolean;
+  userCandled?: boolean;
 }
 
 @Component({
@@ -36,8 +45,10 @@ export class PrayerWallComponent implements OnInit {
 
   isLoading = true;
   hasError = false;
+  animatingActions = new Set<string>();
 
   private readonly apiUrl = 'https://global-prayer-dashboard.onrender.com/api/prayers';
+  private readonly interactionApiBase = 'https://global-prayer-dashboard.onrender.com';
 
   constructor(private http: HttpClient) {}
 
@@ -69,6 +80,7 @@ export class PrayerWallComponent implements OnInit {
 
     return {
       id: prayer.id || index + 1,
+      backendId: prayer._id,
       country: prayer.region?.trim() || 'Global',
       initial: name.slice(0, 1).toUpperCase(),
       name,
@@ -76,6 +88,75 @@ export class PrayerWallComponent implements OnInit {
       prayerText: prayer.request?.trim() || 'Prayer request submitted.',
       priority: prayer.urgency || 'low',
       active: true,
+      prayedCount: prayer.prayedCount || 0,
+      candleCount: prayer.candleCount || 0,
+      userPrayed: prayer.userPrayed || false,
+      userCandled: prayer.userCandled || false,
     };
+  }
+
+  togglePrayed(prayer: PrayerRequest, event: MouseEvent) {
+    event.stopPropagation();
+    this.toggleInteraction(prayer, 'pray');
+  }
+
+  toggleCandle(prayer: PrayerRequest, event: MouseEvent) {
+    event.stopPropagation();
+    this.toggleInteraction(prayer, 'candle');
+  }
+
+  isAnimating(prayer: PrayerRequest, action: 'pray' | 'candle') {
+    return this.animatingActions.has(this.actionKey(prayer, action));
+  }
+
+  private toggleInteraction(prayer: PrayerRequest, action: 'pray' | 'candle') {
+    const wasActive = action === 'pray' ? prayer.userPrayed : prayer.userCandled;
+    const delta = wasActive ? -1 : 1;
+
+    this.applyInteraction(prayer, action, !wasActive, delta);
+    this.animateAction(prayer, action);
+
+    this.http.patch(this.interactionUrl(prayer, action), {}).subscribe({
+      error: (err) => {
+        console.error(`Error updating ${action} interaction:`, err);
+        this.applyInteraction(prayer, action, wasActive, -delta);
+      },
+    });
+  }
+
+  private applyInteraction(
+    prayer: PrayerRequest,
+    action: 'pray' | 'candle',
+    active: boolean,
+    delta: number,
+  ) {
+    if (action === 'pray') {
+      prayer.userPrayed = active;
+      prayer.prayedCount = Math.max(0, prayer.prayedCount + delta);
+      return;
+    }
+
+    prayer.userCandled = active;
+    prayer.candleCount = Math.max(0, prayer.candleCount + delta);
+  }
+
+  private animateAction(prayer: PrayerRequest, action: 'pray' | 'candle') {
+    const key = this.actionKey(prayer, action);
+    this.animatingActions = new Set(this.animatingActions).add(key);
+
+    setTimeout(() => {
+      const next = new Set(this.animatingActions);
+      next.delete(key);
+      this.animatingActions = next;
+    }, 200);
+  }
+
+  private interactionUrl(prayer: PrayerRequest, action: 'pray' | 'candle') {
+    const id = prayer.backendId || prayer.id;
+    return `${this.interactionApiBase}/prayer-requests/${id}/${action}`;
+  }
+
+  private actionKey(prayer: PrayerRequest, action: 'pray' | 'candle') {
+    return `${prayer.backendId || prayer.id}:${action}`;
   }
 }

@@ -43,7 +43,43 @@
 
             <p class="prayer-text">{{ prayer.prayerText }}</p>
 
-            <span class="priority">{{ prayer.priority }} priority</span>
+            <div class="interaction-bar">
+              <div class="actions">
+                <button
+                  class="action-button prayed-action"
+                  type="button"
+                  [class.active]="prayer.userPrayed"
+                  (click)="togglePrayed(prayer, $event)"
+                  aria-label="Mark prayer as prayed"
+                >
+                  <i
+                    class="ti ti-hands-praying"
+                    [class.bounce]="isAnimating(prayer, 'pray')"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="action-count">{{ prayer.prayedCount }}</span>
+                  <span class="action-label">PRAYED</span>
+                </button>
+
+                <button
+                  class="action-button candle-action"
+                  type="button"
+                  [class.active]="prayer.userCandled"
+                  (click)="toggleCandle(prayer, $event)"
+                  aria-label="Light a candle for this prayer"
+                >
+                  <i
+                    class="ti ti-candle"
+                    [class.bounce]="isAnimating(prayer, 'candle')"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="action-count">{{ prayer.candleCount }}</span>
+                  <span class="action-label">CANDLE</span>
+                </button>
+              </div>
+
+              <span class="priority">{{ prayer.priority }} priority</span>
+            </div>
           </div>
         </div>
       </article>

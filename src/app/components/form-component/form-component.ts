@@ -1,19 +1,9 @@
 
 
 import {ChangeDetectionStrategy, Component, EventEmitter, Output, signal} from '@angular/core';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
-
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {merge} from 'rxjs';
-// date picker Material UI Component 
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {provideNativeDateAdapter} from '@angular/material/core';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { ButtonComponent } from '../button/button';
-import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 /** @title Form field with hints */
@@ -21,8 +11,7 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
   selector: 'form-component',
   templateUrl: 'form-component.html',
   styleUrls: ['form-component.css'],
-  providers: [provideNativeDateAdapter()],
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, FormsModule, ReactiveFormsModule, MatDatepickerModule, ButtonComponent],
+  imports: [ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormField{
@@ -63,21 +52,28 @@ export class FormField{
       this.http.post('https://global-prayer-dashboard.onrender.com/api/prayers', this.form.value).subscribe({
         next: (res) => {
           // console.log('✅ Prayer submitted:', res)
-          this.snackBar.open('🙏 Your prayer has been submitted!', 'Close', {
+          this.snackBar.open('Your prayer has been submitted.', 'Close', {
           duration: 4000,
           panelClass: ['snackbar-success']
           });
-          this.form.reset(); 
+          this.form.reset({
+            name: '',
+            email: '',
+            region: 'USA',
+            request: '',
+            date: '',
+            urgency: 'low',
+          }); 
           this.prayerAdded.emit();
         },
          error: (err) => {
-          this.snackBar.open('❌ Submission failed. Please try again.', 'Close', {
+          this.snackBar.open('Submission failed. Please try again.', 'Close', {
           duration: 4000,
           panelClass: ['snackbar-error']
         });
       },      });
     } else {
-      this.snackBar.open('⚠️ Please fill out all required fields.', 'Close', {
+      this.snackBar.open('Please fill out all required fields.', 'Close', {
       duration: 4000,
       panelClass: ['snackbar-warning']
     });

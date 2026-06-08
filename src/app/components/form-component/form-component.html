@@ -1,60 +1,106 @@
 <div class="example-container">
-  <p class="text-neutral-700 mb-4 text-center text-bold">
-  We believe in the power of prayer. Share your request and our community will lift it up.
-</p>
+  <div class="form-header">
+    <p class="form-label">Prayer Request</p>
+    <h3>Place a prayer in the wall</h3>
+    <p>Share your request and choose the level of urgency for the community to carry.</p>
+  </div>
 
-<form [formGroup]="form" (ngSubmit)="submitForm()">
-  <mat-form-field>
-    <mat-label>Enter Your Full Name</mat-label>
-    <input matInput formControlName="name" autocomplete="name"/>
-  </mat-form-field>
+  <form [formGroup]="form" #prayerForm="ngForm" (ngSubmit)="submitForm()">
+    <div class="field-group">
+      <label for="name">Full name</label>
+      <input id="name" class="form-control" formControlName="name" autocomplete="name" />
+      @if (form.get('name')?.invalid && (form.get('name')?.touched || prayerForm.submitted)) {
+        <p class="field-error">Full name is required.</p>
+      }
+    </div>
 
-  <mat-form-field>
-    <mat-label>Enter your email</mat-label>
-    <input id="email" matInput formControlName="email" autocomplete="name" placeholder="pat@example.com" required />
-   @if (form.get('email')?.invalid) {
-  <mat-error>
-    {{ form.get('email')?.hasError('email') ? 'Not a valid email' : 'Email is required' }}
-  </mat-error>
-}
-  </mat-form-field>
+    <div class="field-group">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        class="form-control"
+        formControlName="email"
+        autocomplete="email"
+        placeholder="pat@example.com"
+        required
+      />
+      @if (form.get('email')?.invalid && (form.get('email')?.touched || prayerForm.submitted)) {
+        <p class="field-error">
+          {{ form.get('email')?.hasError('email') ? 'Not a valid email.' : 'Email is required.' }}
+        </p>
+      }
+    </div>
 
- <mat-form-field appearance="fill">
-  <mat-label>Region</mat-label>
-  <input matInput placeholder="Enter your region" formControlName="region" required>
-  <mat-error>
-    Region is required
-  </mat-error>
-  </mat-form-field>
+    <div class="field-group">
+      <label for="region">Region</label>
+      <input
+        id="region"
+        class="form-control"
+        placeholder="Enter your region"
+        formControlName="region"
+        required
+      />
+      @if (form.get('region')?.invalid && (form.get('region')?.touched || prayerForm.submitted)) {
+        <p class="field-error">Region is required.</p>
+      }
+    </div>
 
+    <div class="field-group">
+      <label for="request">Prayer request</label>
+      <textarea
+        id="request"
+        class="form-control textarea-control"
+        formControlName="request"
+        placeholder="Type your prayer here..."
+        maxlength="180"
+      ></textarea>
+      <div class="field-meta">
+        @if (form.get('request')?.invalid && (form.get('request')?.touched || prayerForm.submitted)) {
+          <p class="field-error">
+            {{ form.get('request')?.hasError('maxlength') ? 'Prayer must be under 180 characters.' : 'Prayer request is required.' }}
+          </p>
+        } @else {
+          <span></span>
+        }
+        <span class="character-count">{{ form.get('request')?.value?.length || 0 }}/180</span>
+      </div>
+    </div>
 
-  <mat-form-field>
-    <mat-label>Prayer Request</mat-label>
-    <textarea matInput formControlName="request" placeholder="Type your prayer here..." maxlength="180"></textarea>
-    <mat-hint align="end">{{ form.get('request')?.value?.length || 0 }}/180</mat-hint>
-    @if (form.get('request')?.hasError('maxlength')) {
-      <mat-error>Prayer must be under 180 characters.</mat-error>
-    }
-  </mat-form-field>
+    <div class="field-group">
+      <label for="date">Date</label>
+      <input id="date" class="form-control date-control" type="date" formControlName="date" />
+    </div>
 
+    <div class="field-group">
+      <span class="static-label">Urgency</span>
+      <div class="urgency-group" role="group" aria-label="Prayer urgency">
+        <button
+          type="button"
+          class="urgency-button"
+          [class.active]="form.get('urgency')?.value === 'low'"
+          (click)="form.get('urgency')?.setValue('low')"
+        >
+          Low
+        </button>
+        <button
+          type="button"
+          class="urgency-button"
+          [class.active]="form.get('urgency')?.value === 'medium'"
+          (click)="form.get('urgency')?.setValue('medium')"
+        >
+          Medium
+        </button>
+        <button
+          type="button"
+          class="urgency-button"
+          [class.active]="form.get('urgency')?.value === 'high'"
+          (click)="form.get('urgency')?.setValue('high')"
+        >
+          High
+        </button>
+      </div>
+    </div>
 
-  <mat-form-field>
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="date" />
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Urgency</mat-label>
-    <mat-select formControlName="urgency">
-      <mat-option value="low">🕊️ Low</mat-option>
-      <mat-option value="medium">⏳ Medium</mat-option>
-      <mat-option value="high">🔥 High</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <app-button type="submit" [disabled]="form.invalid"> Submit Prayer</app-button>
-</form>
+    <button class="submit-button" type="submit" [disabled]="form.invalid">Submit Prayer</button>
+  </form>
 </div>
-
